@@ -1,0 +1,106 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="zTreeStyle.css">
+    <script src="jquery-1.4.4.min.js"></script>
+    <script src="jquery.ztree.core.js"></script>
+    <script src="jquery.ztree.excheck.js"></script>
+    <script src="jquery.ztree.exedit.js"></script>
+    <script src="jquery.ztree.all.js"></script>
+    <script src="jquery.ztree.exhide.js"></script>
+</head>
+<body>
+        <div>
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+</body>
+</html>
+<script>
+        var setting={
+             check: {    
+                    enable: true,    
+                    nocheckInherit: false ,  
+                    // chkboxType: { "Y": "p", "N": "s" }   
+                },    
+                data:{
+                  simpleData: {
+                    enable: true,//数据格式为简单模式
+                    // idKey: "id",//节点数据中保存唯一标识的属性名称
+                    // pIdKey:"pid",//节点数据中保存其父节点唯一标识的属性名称
+                    // rootPId:0,//用于修正根节点父节点数据，即 pIdKey 指定的属性值
+                  }
+               },
+               edit: {
+                  enable: true,
+                  editNameSelectAll:false,
+                  showRemoveBtn: true,  //删除图标
+                  removeTitle: "删除节点",
+                  showRenameBtn: true,  //编辑图标
+                  renameTitle: "编辑节点",
+                  drag:{
+                    isCopy:false,
+                    isMove:false
+                  }
+                },
+                callback: {  
+                    beforeClick: this.beforeClick,  
+                    onClick: this.zTreeOnClick,  
+                    onCheck: this.zTreeOnCheck,  
+                },
+        }
+
+        var zNodes=[
+            { name:"父节点1 - 展开", open:true,  
+                  children: [  
+                      { name:"父节点11 - 折叠",  
+                          children: [  
+                              { name:"叶子节点111"},  
+                              { name:"叶子节点112"},  
+                              { name:"叶子节点113"},  
+                              { name:"叶子节点114"}  
+                          ]},  
+                      { name:"父节点12 - 折叠",  
+                          children: [  
+                              { name:"叶子节点121"},  
+                              { name:"叶子节点122"},  
+                              { name:"叶子节点123"},  
+                              { name:"叶子节点124"}  
+                          ]},  
+                      { name:"父节点13 - 没有子节点", isParent:true}  
+                  ]},  
+              { name:"父节点2 - 折叠",  
+                  children: [  
+                      { name:"父节点21 - 展开", open:true,  
+                          children: [  
+                              { name:"叶子节点211"},  
+                              { name:"叶子节点212"},  
+                              { name:"叶子节点213"},  
+                              { name:"叶子节点214"}  
+                          ]},  
+                      { name:"父节点22 - 折叠",  
+                          children: [  
+                              { name:"叶子节点221"},  
+                              { name:"叶子节点222"},  
+                              { name:"叶子节点223"},  
+                              { name:"叶子节点224"}  
+                          ]},  
+                      { name:"父节点23 - 折叠",  
+                          children: [  
+                              { name:"叶子节点231"},  
+                              { name:"叶子节点232"},  
+                              { name:"叶子节点233"},  
+                              { name:"叶子节点234"}  
+                          ]}  
+                  ]},  
+              { name:"父节点3 - 没有子节点", isParent:true}  
+        ]
+
+    window.onload=function(){
+             $.fn.zTree.init($("#treeDemo"),setting,zNodes)
+    }
+
+</script>
